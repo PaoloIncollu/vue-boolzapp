@@ -181,8 +181,7 @@ createApp({
     ],
     
     currentChat: 0,
-    
-    self:this,
+    newMsg:''
     
     }
   },
@@ -192,8 +191,46 @@ createApp({
       this.currentChat = index;
       
     },
-    sendMsg(){
 
+    getFullDate(){
+
+      const now = new Date();
+      let fullDate = '';
+      fullDate += now.getDate().toString().padStart(2, '0');
+      fullDate += '/';
+      fullDate += now.getMonth().toString();
+      fullDate += '/';
+      fullDate += now.getFullYear().toString();
+      fullDate += ' ';
+      fullDate += now.getHours().toString().padStart(2, '0');
+      fullDate += ':';
+      fullDate += now.getMinutes().toString().padStart(2, '0');
+      fullDate += ':';
+      fullDate += now.getSeconds().toString().padStart(2, '0');
+      
+      return fullDate; 
+    },
+
+    sendMsg(){
+      
+      if(this.newMsg.trim().length != 0){
+        this.contacts[this.currentChat].messages.push({
+        date: this.getFullDate(),
+        message: this.newMsg.trim(),
+        status:'sent'
+        })
+        console.log(this.getFullDate);
+      }
+
+      this.newMsg= '';
+
+      setTimeout(()=>{
+        this.contacts[this.currentChat].messages.push({
+          date: this.getFullDate(),
+          message: 'Ok',
+          status:'received'
+          })
+      }, 1000)
       
     }
   }
