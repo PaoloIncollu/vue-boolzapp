@@ -42,7 +42,7 @@
         </div>
         <div id="app" class="my-content-container d-flex">
 
-                <div  class="aside d-flex flex-column">
+                <div  class="aside">
 
                     <header class="aside-header d-flex flex-column">
 
@@ -58,7 +58,7 @@
                                 <span class="ps-1 fw-bold">Sofia</span>
                             </div>
                             
-                            <ul class="d-flex aside-icons list-style align-items-center">
+                            <ul class="d-flex list-style align-items-center">
 
                                 <li class="">
                                     <a href="#">
@@ -86,13 +86,13 @@
 
                         <div class="header-bottom d-flex align-items-center p-3">
 
-                            <div class="top">
+                            <div>
 
                                 <i class="fa-solid fa-bell-slash fa-lg icon-bell rounded-circle"></i>
 
                             </div>
                             
-                            <div class="bottom ps-2">
+                            <div class="ps-2">
 
                                 <h6 class="fw-bold">
                                     Ricevi notifiche di nuovi messaggi
@@ -106,9 +106,9 @@
                             
                     </header>
     
-                    <main>
+                    <main class="aside-main">
     
-                        <div class="p-2">
+                        <div class="p-2 search-contact">
 
                             <form>
                             <div class="input-group">
@@ -127,12 +127,16 @@
                             </form>
                         </div>
 
-                        
-                        <div class="d-flex justify-content-between border-top py-3 px-2" v-for="(contact, index) in contacts">
+                        <div class="pt-2 chat-container overflow-auto ">
 
-                                <div class="d-flex">
+                            <div v-for="(contact, index) in contacts"  
+                                @click.prevent="activeChat(index)"
+                                class="d-flex justify-content-between border-top py-3 px-2 " 
+                                :class="currentChat == index ? 'active' : ''" >
 
-                                    <div class="img-user ">
+                                <div class="d-flex" >
+
+                                    <div class="img-user">
                                     
                                         <img :src="contact.avatar" :alt="contact.name">
 
@@ -170,8 +174,8 @@
                                 </div>
                                 
 
+                            </div>
                         </div>
-                        
 
                     </main>
     
@@ -182,22 +186,20 @@
 
                     <header>
 
-                        <div class="d-flex justify-content-between border-top py-3 px-2" v-for="(contact, index) in contacts">
+                        <div class="header-top d-flex justify-content-between px-2 align-items-center">
 
-                            <div class="d-flex">
+                            
+                            <div class="d-flex align-items-center">
 
                                 <div class="img-user ">
-                                
-                                    <img :src="contact.avatar" :alt="contact.name">
-
+                                    <img :src="contacts[currentChat].avatar" :alt="contacts[currentChat].name">
                                 </div>
-                            
                                 
                                 <div class="ps-2">
 
                                     <span class="fw-bold">
 
-                                        {{contact.name}}
+                                        {{contacts[currentChat].name}}
 
                                     </span> 
 
@@ -205,7 +207,7 @@
 
                                     <span class="color-grey">
 
-                                        Ultimo messaggio inviato
+                                        Ultimo accesso oggi alle 12:00
 
                                     </span>
 
@@ -213,28 +215,92 @@
 
                             </div>
 
-                            <div>
+                            <ul class="d-flex aside-icons list-style align-items-center">
 
-                                <span class="color-grey ">
+                                <li>
 
-                                    12:00
+                                    <a href="#">
 
-                                </span>
+                                        <i class="fa-solid fa-magnifying-glass icon"></i>
 
-                            </div>
+                                    </a>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="#">
+
+                                        <i class="fa-solid fa-paperclip icon"></i>
+                                        
+                                    </a>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="#">
+                                        
+                                        <i class="fa-solid fa-ellipsis-vertical icon"></i>
+
+                                    </a>
+                                </li>
+
+                            </ul>
+
                             
 
-                    </div>
+                        </div>
                         
                     </header>
 
                     <main>
+                        <div class="container-messages">
+                            <div  v-for="(msg,index) in contacts[currentChat].messages"
+                                class="messages">
+                                
+                                <div class="single-message rounded"
+                                    :class="msg.status == 'sent' ? 'sent' : 'received'">
 
+                                    <div class="text-message">
+
+                                        {{msg.message}}
+
+                                    </div>
+
+                                    <div class="date-message">
+                                        {{msg.date}}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                            
 
                     </main>
 
-                    <footer>
+                    <footer class="d-flex justify-content-around align-items-center">
 
+                        <div class="icon ">
+
+                            <i class="fa-regular fa-face-smile fa-xl "></i>
+
+                        </div>
+
+                        <div class="col-8">
+
+                            <input class="form-control" type="text" placeholder="Scrivi un messaggio">
+                        
+                        </div>
+
+                        <div class="icon">
+
+                            <i class="fa-solid fa-microphone fa-xl"></i>
+
+                        </div>
+                        
                 
                     </footer>
 
