@@ -7,3 +7,134 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/*Root*/
+
+:root{
+
+    --grey:#B1B1B1;
+    --bg-light-grey:#EAEAEA;
+}
+
+/*General*/
+
+img{
+
+    width: 100%;
+    
+}
+.my-container{
+
+    width: 100vw;
+    height:  100vh;
+    position: relative;
+}
+.my-container .top-bg{
+
+    background-color: #009688;
+    width: 100vw;
+    height: 20vh;
+}
+
+.my-container .bottom-bg{
+
+    background-color: #D9DBD4;
+    width: 100vw;
+    height: 80vh;
+}
+
+.icon{
+
+    color:var(--grey);
+    width: 40px; 
+    
+}
+
+.list-style{
+
+    height: 40px;
+    list-style: none;
+    margin-bottom: 0;
+}
+
+/*Main content*/
+
+.my-content-container{
+
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    right: 10%;
+    width: 80%;
+    height:90%;
+    
+}
+
+/*Aside*/
+
+.my-content-container .aside{
+
+    width: 30vw;
+    height: 100%;
+    background-color:#FFFFFF;
+}
+
+.header-top{
+
+    width:30vw;
+    height: 10vh;
+    background-color: var(--bg-light-grey);
+    
+}
+
+.img-user{
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.img-user > img{
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+/*Main Message*/
+
+.my-content-container .main-message{
+    position: relative;
+    width: 70%;
+    height: 100%;
+    background-color: aqua;
+    background-image: url("../img/mine.jpg");
+    padding-left: 5px;
+}
+
+/* Header*/
+
+.main-message > header{
+
+    width: 100%;
+    height: 10vh;
+    background-color: var(--bg-light-grey);
+    
+}
+
+/*Contenuto*/
+
+/*Footer*/
+
+.main-message > footer{
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: calc(100% - 5px);
+    height: 10vh;
+    background-color: var(--bg-light-grey);
+    
+}
