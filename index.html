@@ -28,6 +28,8 @@
     </head>
 
     <body>
+
+        <!--Sfondo pagina-->
         <div class="my-container">
 
             <div class="top-bg">
@@ -40,12 +42,14 @@
             
             
         </div>
+        <!--Container app-->
         <div id="app" class="my-content-container d-flex">
 
+                <!--aside contatti-->
                 <div  class="aside">
 
                     <header class="aside-header d-flex flex-column">
-
+                        <!--User contact-->
                         <div class="header-top d-flex justify-content-between px-2 align-items-center">
 
                             
@@ -107,10 +111,10 @@
                     </header>
     
                     <main class="aside-main">
-    
+                        <!--Barra di ricerca contatti-->
                         <div class="p-2 search-contact">
 
-                            <form>
+                            
                             <div class="input-group">
 
                                 <label class="visually-hidden" for="search-user">Search</label>
@@ -118,21 +122,26 @@
                                 <div class="input-group-text">
 
                                     <i class="fa-solid fa-magnifying-glass"></i>
-                                    
+                                        
                                 </div>
+                                
+                                <input v-model="searchContact"
+                                    @keyup="searchChat()"
+                                    type="search" class="form-control" 
+                                    id="search-user" placeholder="Cerca o inizia una nuova chat" 
+                                    aria-label="Search">
+                                
+                            </div>
                             
-                                <input type="search" class="form-control" id="search-user" placeholder="Cerca o inizia una nuova chat" aria-label="Search">
-                              
-                                </div>
-                            </form>
                         </div>
-
-                        <div class="pt-2 chat-container overflow-auto ">
+                        <!--Lista contatti recenti-->
+                        <div class="py-2 chat-container overflow-auto ">
 
                             <div v-for="(contact, index) in contacts"  
                                 @click.prevent="activeChat(index)"
-                                class="d-flex justify-content-between border-top py-3 px-2 " 
-                                :class="currentChat == index ? 'active' : ''" >
+                                :class="contact.visible === true ? 'visible' : '', currentChat == index ? 'active' : ''" 
+                                class="border-top p-4 contact-tab "
+                                >
 
                                 <div class="d-flex" >
 
@@ -165,7 +174,7 @@
 
                                 <div>
 
-                                    <span class="color-grey ">
+                                    <span class="color-grey float-end">
 
                                         12:00
 
@@ -182,10 +191,11 @@
                 
                 </div>
 
+                <!--Container messaggi chat-->
                 <div class="main-message">
 
                     <header>
-
+                        <!--Header con le informazioni del contatto della chat attiva-->
                         <div class="header-top d-flex justify-content-between px-2 align-items-center">
 
                             
@@ -254,6 +264,7 @@
                         
                     </header>
 
+                    <!--Container messaggi della chat attiva-->
                     <main>
                         <div class="container-messages">
                             <div  v-for="(msg,index) in contacts[currentChat].messages"
@@ -280,7 +291,7 @@
                             
 
                     </main>
-
+                    <!--Input per inviare messaggi nella chat attiva-->
                     <footer class="d-flex justify-content-around align-items-center">
 
                         <div class="icon ">

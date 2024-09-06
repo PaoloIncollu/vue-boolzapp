@@ -181,17 +181,22 @@ createApp({
     ],
     
     currentChat: 0,
-    newMsg:''
+    newMsg:'',
+    searchContact:''
     
     }
+    
   },
   methods:{
+    
+    //Funzione per decretare la chat attiva
     activeChat(index){
       
       this.currentChat = index;
       
     },
 
+    //Funzione per creare la data esatta
     getFullDate(){
 
       const now = new Date();
@@ -211,6 +216,7 @@ createApp({
       return fullDate; 
     },
 
+    //Funzione per mandare i messaggi
     sendMsg(){
       
       if(this.newMsg.trim().length != 0){
@@ -224,7 +230,9 @@ createApp({
 
       this.newMsg= '';
 
+      //Funzione per ricevere un messaggio dopo un intervallo di tempo
       setTimeout(()=>{
+
         this.contacts[this.currentChat].messages.push({
           date: this.getFullDate(),
           message: 'Ok',
@@ -232,6 +240,21 @@ createApp({
           })
       }, 1000)
       
+    },
+
+    //Funzione per cercare la chat in base al nome del contatto
+    searchChat(){
+
+      for(let i = 0; i < this.contacts.length; i++){
+        if(this.contacts[i].name.toLowerCase().includes(this.searchContact.toLowerCase())){
+          this.contacts[i].visible = true;
+        } 
+        else{
+          this.contacts[i].visible = false;
+        }
+      }
+      
     }
+    
   }
 }).mount('#app');
